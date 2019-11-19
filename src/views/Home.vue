@@ -2,20 +2,20 @@
     <div class="home">
         <w-card class="merchant-info">
             <w-merchant-item
-                :name="info.name"
+                :name="info.store_name"
                 :address="info.address"
                 :desc="info.desc"
-                :logo="info.logo"
+                :logo="info.store_avatar"
             />
         </w-card>
         <w-card class="datas">
             <group>
-                <cell title="已领取" :value="datas.received"></cell>
-                <cell title="已核销" :value="datas.applied"></cell>
-                <cell title="未领取" :value="datas.unaccalimed"></cell>
+                <cell title="已领取" :value="info.received"></cell>
+                <cell title="已核销" :value="info.received"></cell>
+                <cell title="未领取" :value="info.unaccalimed"></cell>
             </group>
         </w-card>
-        <x-button class="home-btn" type="primary">扫码核销</x-button>
+        <x-button class="home-btn" type="primary" @click.native="handleScanCode">扫码核销</x-button>
     </div>
 </template>
 <script>
@@ -26,6 +26,14 @@
 // 组件
 import WCard from '@/components/WCard'
 import WMerchantItem from '@/components/WMerchantItem'
+
+// 接口
+import {wx_config, get_merchant_info} from '@/api/index'
+import {wxAuthority, scanQRCode} from '@/plugins/wechat-sdk'
+
+// 依赖
+import Qs from 'qs'
+import baseUrl from '@/utils/doman'
 export default {
     name: 'Home',
     components: {
@@ -34,18 +42,41 @@ export default {
     },
     data() {
         return {
-            info: {
-                id: '1',
-                name: '西域狼烧烤（云南路店）',
-                address: '云南南路100号',
-                desc: '签到5天，即享30瓶啤酒',
-                logo: require('@/assets/imgs/1.png')
-            },
-            datas: {
-                received: 330,
-                applied: 45,
-                unaccalimed: 285
-            }
+            info: {}
+        }
+    },
+    created() {
+        this.initHome()
+    },
+    methods: {
+        initHome() {
+            this.getAth()
+            this.getInfo()
+        },
+        getAth() {
+            const url = window.location.href
+            wx_config({url}).then(({data}) => {
+                wxAuthority(data)
+            })
+        },
+        getInfo() {
+            get_merchant_info().then(({data}) => {
+                document.title = data.store_name
+                data.unaccalimed = data.total_receive - data.received
+                data.desc = `签到${data.checkin_days}天，即享${data.checkin_num}瓶啤酒`
+                const file = {
+                    filename: data.store_avatar,
+                    type: 'avatar'
+                }
+                const regx = /type=avatar$/i
+                data.store_avatar = regx.test(data.store_avatar) ? data.store_avatar : `${baseUrl}v1/files/download?${Qs.stringify(
+                    file
+                )}`
+                this.info = data
+            })
+        },
+        handleScanCode() {
+            scanQRCode()
         }
     }
 }

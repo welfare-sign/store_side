@@ -60,7 +60,7 @@ export function get_merchant_info(params) {
      * @parmas (object): 
      *  @merchant_id (string): 商户ID,商户访问时可不传
      */
-    return ({
+    return http({
         url: 'v1/merchants/detail',
         method: 'get',
         params
@@ -82,13 +82,17 @@ export function writeoff_info (params) {
     })
 }
 
-export function writeoff() {
+export function writeoff(data) {
     /**
      * @description 商户核销
      * @return (promise)
+     * @data (object):
+     *  @customer_id (string): 客户id
+     *  @num (number): 核销数量
      */
     return http({
         url: 'v1/merchants/writeoff',
-        method: 'post'
+        method: 'post',
+        data
     })
 }

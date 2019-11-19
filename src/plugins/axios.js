@@ -2,8 +2,9 @@ import Vue from 'vue'
 import router from '@/router'
 
 // 依赖
-import { AjaxPlugin, Toast } from 'vux'
+import { AjaxPlugin, ToastPlugin } from 'vux'
 Vue.use(AjaxPlugin)
+Vue.use(ToastPlugin)
 import Cookies from 'js-cookie'
 import baseUrl from '@/utils/doman'
 const http = Vue.http.create({
@@ -42,9 +43,11 @@ http.interceptors.response.use(
 			if (data.code === 'NO_PERMISSION') {
 				router.replace({ name: 'login' })
 			} else {
-				Toast.show({
-					text: data.message
+				Vue.$vux.toast.show({
+					text: data.message,
+					type: 'text'
 				})
+				return Promise.reject(data)
 			}
 		}
 	},

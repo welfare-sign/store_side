@@ -7,7 +7,10 @@ import {
 	Qrcode,
 	Cell,
 	WechatPlugin,
-	AjaxPlugin
+	AjaxPlugin,
+	XInput,
+	ToastPlugin,
+	Countup
 } from 'vux'
 
 Vue.component('x-button', XButton)
@@ -16,5 +19,8 @@ Vue.component('cell-box', CellBox)
 Vue.component('x-img', XImg)
 Vue.component('qrcode', Qrcode)
 Vue.component('cell', Cell)
+Vue.component('x-input', XInput)
+Vue.component('countup', Countup)
 Vue.use(WechatPlugin)
 Vue.use(AjaxPlugin)
+Vue.use(ToastPlugin)

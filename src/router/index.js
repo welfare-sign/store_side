@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
+import WriteOff from '@/views/WriteOff'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,11 @@ const routes = [
 		path: '/login',
 		name: 'login',
 		component: () => import('@/views/Login')
+	},
+	{
+		path: '/writeoff',
+		name: 'write_off',
+		component: WriteOff
 	}
 ]
 
