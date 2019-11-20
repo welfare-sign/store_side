@@ -7,7 +7,7 @@ const jsApiList = [
 
 export function wxAuthority(options) {
     wx.config({
-      debug: true,
+      debug: false,
       appId: options.appid, // 必填，公众号的唯一标识
       timestamp: options.timestamp, // 必填，生成签名的时间戳
       nonceStr: options.noncestr, // 必填，生成签名的随机串

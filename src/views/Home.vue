@@ -28,8 +28,8 @@ import WCard from '@/components/WCard'
 import WMerchantItem from '@/components/WMerchantItem'
 
 // 接口
-import {wx_config, get_merchant_info} from '@/api/index'
-import {wxAuthority, scanQRCode} from '@/plugins/wechat-sdk'
+import { wx_config, get_merchant_info } from '@/api/index'
+import { wxAuthority, scanQRCode } from '@/plugins/wechat-sdk'
 
 // 依赖
 import Qs from 'qs'
@@ -45,23 +45,15 @@ export default {
             info: {}
         }
     },
-    mounted() {
+    created() {
         this.initHome()
     },
     methods: {
         initHome() {
             this.getAth()
-            this.getInfo()
-        },
-        getAth() {
-            const url = window.location.href
-            alert('当前url', url)
-            wx_config({url}).then(({data}) => {
-                wxAuthority(data)
-            })
         },
         getInfo() {
-            get_merchant_info().then(({data}) => {
+            get_merchant_info().then(({ data }) => {
                 document.title = data.store_name
                 data.unaccalimed = data.total_receive - data.received
                 data.desc = `签到${data.checkin_days}天，即享${data.checkin_num}瓶啤酒`
@@ -70,10 +62,17 @@ export default {
                     type: 'avatar'
                 }
                 const regx = /type=avatar$/i
-                data.store_avatar = regx.test(data.store_avatar) ? data.store_avatar : `${baseUrl}v1/files/download?${Qs.stringify(
-                    file
-                )}`
+                data.store_avatar = regx.test(data.store_avatar)
+                    ? data.store_avatar
+                    : `${baseUrl}v1/files/download?${Qs.stringify(file)}`
                 this.info = data
+                this.getInfo()
+            })
+        },
+        getAth() {
+            const url = window.location.href
+            wx_config({ url }).then(({ data }) => {
+                wxAuthority(data)
             })
         },
         handleScanCode() {
