@@ -50,7 +50,7 @@ export default {
     },
     methods: {
         initHome() {
-            this.getAth()
+            this.getInfo()
         },
         getInfo() {
             get_merchant_info().then(({ data }) => {
@@ -66,7 +66,7 @@ export default {
                     ? data.store_avatar
                     : `${baseUrl}v1/files/download?${Qs.stringify(file)}`
                 this.info = data
-                this.getInfo()
+                this.getAth()
             })
         },
         getAth() {
