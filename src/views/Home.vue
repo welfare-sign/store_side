@@ -45,7 +45,7 @@ export default {
             info: {}
         }
     },
-    created() {
+    mounted() {
         this.initHome()
     },
     methods: {
