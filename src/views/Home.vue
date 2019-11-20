@@ -55,6 +55,7 @@ export default {
         },
         getAth() {
             const url = window.location.href
+            alert('当前url', url)
             wx_config({url}).then(({data}) => {
                 wxAuthority(data)
             })
