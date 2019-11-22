@@ -28,7 +28,7 @@ import WCard from '@/components/WCard'
 import WMerchantItem from '@/components/WMerchantItem'
 
 // 接口
-import { wx_config, get_merchant_info } from '@/api/index'
+import { get_merchant_info } from '@/api/index'
 import { wxAuthority, scanQRCode } from '@/plugins/wechat-sdk'
 
 // 依赖
@@ -66,15 +66,15 @@ export default {
                     ? data.store_avatar
                     : `${baseUrl}v1/files/download?${Qs.stringify(file)}`
                 this.info = data
-                this.getAth()
+                // this.getAth()
             })
         },
-        getAth() {
-            const url = window.location.href
-            wx_config({ url }).then(({ data }) => {
-                wxAuthority(data)
-            })
-        },
+        // getAth() {
+        //     const url = window.location.href
+        //     wx_config({ url }).then(({ data }) => {
+        //         wxAuthority(data)
+        //     })
+        // },
         handleScanCode() {
             scanQRCode()
         }

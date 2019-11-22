@@ -1,4 +1,5 @@
-import Vue from 'vue'
+// 接口
+import { wx_config } from "@/api/index";
 const wx = require('weixin-js-sdk')
 
 const jsApiList = [
@@ -30,6 +31,13 @@ export function wxAuthority(options) {
       //   type: 'text'
       // })
     })
+  }
+
+  export function authority(url) {
+    wx_config({ url }).then(({ data }) => {
+      sessionStorage.setItem('appid', data.appid)
+      wxAuthority(data);
+    });
   }
 
   export function scanQRCode() {

@@ -9,6 +9,9 @@ import './plugins/vux'
 import 'reset-css'
 import './styles/theme.less'
 
+// 全局设置权限
+import '@/utils/wxAuthority'
+
 Vue.config.productionTip = false
 
 new Vue({
