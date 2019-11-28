@@ -21,7 +21,8 @@ import WCountdown from '@/components/WCountdown'
 import {verify_code, lgoin} from '@/api/index'
 
 // 常量
-const mobileRegx = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/
+// const mobileRegx = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/
+const mobileRegx = /^1[3456789]\d{9}$/
 export default {
     name: 'Login',
     components: {
