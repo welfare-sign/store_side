@@ -10,7 +10,7 @@
         </w-card>
         <w-card class="datas">
             <group>
-                <cell title="已领取" :value="info.received"></cell>
+                <cell title="已领取" :value="info.received - info.has_failure"></cell>
                 <cell title="已核销" :value="info.has_write_off_num"></cell>
                 <cell title="已失效" :value="info.has_failure"></cell>
                 <cell title="未领取" :value="info.unaccalimed"></cell>
@@ -58,7 +58,7 @@ export default {
         getInfo() {
             get_merchant_info().then(({ data }) => {
                 document.title = data.store_name
-                data.unaccalimed = data.total_receive - data.received
+                data.unaccalimed = data.total_receive - (data.received - data.has_failure)
                 data.desc = `签到${data.checkin_days}天，即享${data.checkin_num}瓶啤酒`
                 const file = {
                     filename: data.store_avatar,
