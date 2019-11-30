@@ -16,6 +16,7 @@
             </group>
         </w-card>
         <x-button class="home-btn" type="primary" @click.native="handleScanCode">扫码核销</x-button>
+        <x-button class="home-btn" type="primary" plain @click.native="handleExit">退出登录</x-button>
     </div>
 </template>
 <script>
@@ -32,6 +33,7 @@ import { get_merchant_info } from '@/api/index'
 import { wxAuthority, scanQRCode } from '@/plugins/wechat-sdk'
 
 // 依赖
+import Cookies from 'js-cookie'
 import Qs from 'qs'
 import baseUrl from '@/utils/doman'
 export default {
@@ -77,6 +79,10 @@ export default {
         // },
         handleScanCode() {
             scanQRCode()
+        },
+        handleExit() {
+            Cookies.set('Authorization', '')
+            this.$router.replace({name: 'login'})
         }
     }
 }
