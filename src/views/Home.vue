@@ -11,7 +11,7 @@
         <w-card class="datas">
             <group>
                 <cell title="已领取" :value="info.received"></cell>
-                <cell title="已核销" :value="info.received"></cell>
+                <cell title="已核销" :value="info.has_write_off_num"></cell>
                 <cell title="未领取" :value="info.unaccalimed"></cell>
             </group>
         </w-card>

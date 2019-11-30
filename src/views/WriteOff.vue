@@ -3,7 +3,8 @@
         <section>
             <p class="h" v-if="writeoffDone">核销成功</p>
             <p class="h1" v-else>用户 {{customerInfo.nickname}} 剩余</p>
-            <countup :start-val="0" :end-val="num" class="countup" />
+            <!-- <countup :start-val="0" :end-val="num" class="countup" /> -->
+            <p class="countup" >{{num}}</p>
         </section>
         <footer>
             <p class="h1" v-if="writeoffDone">用户 {{customerInfo.nickname}} 剩余：{{record.total_receive - record.received}}</p>
@@ -45,6 +46,7 @@ export default {
     methods: {
         initWriteOff() {
             writeoff_info({ customer_id: this.customerId }).then(({ data }) => {
+                console.log('data', data)
                 document.title = data.merchant.store_name
                 this.customerInfo = data.customer
                 this.storeInfo = data.merchant
