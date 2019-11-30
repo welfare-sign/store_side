@@ -7,7 +7,7 @@
             <p class="countup" >{{num}}</p>
         </section>
         <footer>
-            <p class="h1" v-if="writeoffDone">用户 {{customerInfo.nickname}} 剩余：{{record.total_receive - record.received}}</p>
+            <p class="h1" v-if="writeoffDone">用户 {{customerInfo.nickname}} 剩余：{{record.received}}</p>
             <p class="h1" v-else>本次核销</p>
             <x-input type="number" v-model="writeoffNumber" placeholder="请输入核销数量" v-if="!writeoffDone"></x-input>
             <x-button type="primary" :disabled="!writeoffNumber" @click.native="handleConfirm" v-if="!writeoffDone">确认</x-button>
@@ -35,7 +35,7 @@ export default {
         num() {
             const record = this.record
             const reminder = record.total_receive - record.received
-            return this.writeoffDone ? this.WriteoffNum : reminder
+            return this.writeoffDone ? this.thisWriteoffNum : reminder
         }
     },
     created() {
