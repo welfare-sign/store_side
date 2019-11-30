@@ -2,7 +2,7 @@
     <div class="login">
         <h1 class="title">福利签商户后台</h1>
         <group class="form-group">
-            <x-input placeholder="请输入手机号" type="text" is-type="china-mobile" v-model="contact_phone">
+            <x-input placeholder="请输入手机号" type="text" v-model="contact_phone">
                 <w-countdown slot="right" v-model="countStart" :color="countColor" @click-event="handleStart" />
             </x-input>
             <x-input placeholder="请输入验证码" v-model="code"></x-input>
