@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <h1 class="title">福利签商户后台</h1>
+        <h1 class="title">福力签商户后台</h1>
         <group class="form-group">
             <x-input placeholder="请输入手机号" type="text" :max="11" v-model="contact_phone">
                 <w-countdown slot="right" v-model="countStart" :color="countColor" @click-event="handleStart" />
