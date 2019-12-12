@@ -116,6 +116,7 @@ export default {
         text-align: center;
         font-size: @normal-font-size;
         color: @assist-font-color;
+        line-height: 2;
     }
 }
 </style>
